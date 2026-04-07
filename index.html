@@ -19,12 +19,10 @@
       min-height: 100svh;
       position: relative;
       overflow-x: hidden;
-      overflow-y: hidden; /* 🔥 prevent scroll initially */
+      overflow-y: hidden;
     }
 
-    body.unlocked {
-      overflow-y: auto; /* allow scroll after click */
-    }
+    body.unlocked { overflow-y: auto; }
 
     body::before {
       content: "";
@@ -53,6 +51,19 @@
       padding: 40px 20px;
     }
 
+    .center-page {
+      justify-content: center !important;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .center-page.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .top-text { font-size: 12px; letter-spacing: 3px; }
     .names { font-family: 'Great Vibes', cursive; font-size: 48px; }
     .date { font-family: 'Playfair Display', serif; font-size: 13px; }
@@ -60,7 +71,7 @@
     .guest-name {
       font-family: 'Playfair Display', serif;
       font-size: 18px;
-      margin: 10px 0 20px; /* 🔥 added spacing */
+      margin: 10px 0 20px;
     }
 
     .middle {
@@ -81,7 +92,30 @@
       cursor: pointer;
     }
 
-    .next-section { justify-content: center; }
+    .scroll-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeIn 2s ease 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .arrow {
+      margin-top: 5px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
 
     .music-btn {
       position: fixed;
@@ -101,24 +135,19 @@
   <!-- PAGE 1 -->
   <section id="page1">
     <div>
-      <div class="top-text">
-        WE INVITE YOU TO CELEBRATE <br>
-        OUR WEDDING <br>
-
-      </div>
+      <div class="top-text">WE INVITE YOU TO CELEBRATE <br> OUR WEDDING</div>
       <div class="names">feby & ugi</div>
       <div>♥</div>
       <div class="date">MINGGU, 31 MEI 2026</div>
     </div>
 
-    <!-- BUTTON IN MIDDLE -->
     <div class="middle">
       <button class="btn" onclick="openInvitation()">BUKA UNDANGAN</button>
     </div>
 
     <div>
       <div>Yth. Bapak/Ibu/Saudara/i</div>
-      <div id="guestName" class="guest-name">H. Koab bin Samsul</div>
+      <div id="guestName" class="guest-name">Guest Name</div>
       <div>
         tanpa mengurangi rasa hormat,<br>
         kami mengundang anda<br>
@@ -128,31 +157,30 @@
   </section>
 
   <!-- PAGE 2 -->
-  <section id="page2">
+  <section id="page2" class="center-page">
     <div>
-      <div class="top-text">
-        WE INVITE YOU TO CELEBRATE <br>
-        OUR WEDDING <br>
-
-      </div>
+      <div class="top-text">WE INVITE YOU TO CELEBRATE <br> OUR WEDDING</div>
       <div class="names">feby & ugi</div>
       <div>♥</div>
       <div class="date">MINGGU, 31 MEI 2026</div>
     </div>
+
+    <div class="scroll-hint">
+      SCROLL DOWN
+      <div class="arrow">↓</div>
+    </div>
   </section>
 
   <!-- PAGE 3 -->
-  <section id="page2">
-    <div class="bride-title">
-        <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px;">THE BRIDE</h2>
-        <img src="2.jpg" alt="Prewedding" style="width:100%; max-width:300px; margin-top:20px; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
-        
-        <div class="names" style="font-size: 36px; margin: 10px 0 20px;">Feby Marlia Anwar S.Si</div>
+  <section id="page3">
+    <div>
+      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px;">THE BRIDE</h2>
+      <img src="2.jpg" style="width:100%; max-width:300px; margin-top:20px; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+      <div class="names" style="font-size: 36px; margin: 10px 0 20px;">Feby Marlia Anwar S.Si</div>
     </div>
 
-
-    <div class="bride-desc">
-      Putri dari<br> 
+    <div>
+      Putri dari<br>
       Bapak [Nama Ayah]<br>
       Ibu [Nama Ibu]
     </div>
@@ -160,13 +188,12 @@
 
   <!-- MUSIC -->
   <audio id="music" loop>
-    <source src="Ed Sheeran - Perfect.mp3" type="audio/mp3">
+    <source src="music.mp3" type="audio/mp3">
   </audio>
 
   <button class="music-btn" onclick="toggleMusic()">♪</button>
 
   <script>
-    // Guest name
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
     if (name) {
@@ -174,19 +201,18 @@
     }
 
     function openInvitation() {
-      // unlock scroll
       document.body.classList.add('unlocked');
-
-      // remove page 1
       document.getElementById("page1").remove();
 
-      // scroll to page 2
-      document.getElementById("page2").scrollIntoView();
+      const page2 = document.getElementById("page2");
+      page2.scrollIntoView();
 
-      // play music
+      setTimeout(() => {
+        page2.classList.add('show');
+      }, 200);
+
       document.getElementById("music").play();
 
-      // block back
       history.pushState(null, null, location.href);
       window.onpopstate = function () {
         history.go(1);
