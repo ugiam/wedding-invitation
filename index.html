@@ -5,26 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Undangan Pernikahan</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: #fff;
-      min-height: 100svh; /* better mobile height */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      text-align: center;
+      min-height: 100svh;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* Background image (blur + zoom for nicer effect) */
     body::before {
       content: "";
       position: fixed;
@@ -35,7 +31,6 @@
       z-index: -2;
     }
 
-    /* Dark overlay */
     body::after {
       content: "";
       position: fixed;
@@ -44,88 +39,129 @@
       z-index: -1;
     }
 
-    .container {
-      width: 90%;
-      max-width: 420px; /* mobile-friendly */
+    section {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
       padding: 40px 20px;
     }
 
-    .top-text {
-      font-size: 11px;
-      letter-spacing: 3px;
-      margin-bottom: 30px;
+    .top-text { font-size: 12px; letter-spacing: 3px; }
+    .names { font-family: 'Great Vibes', cursive; font-size: 48px; }
+    .date { font-family: 'Playfair Display', serif; font-size: 13px; }
+
+    .guest-name { font-family: 'Playfair Display', serif; font-size: 18px; }
+
+    .middle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
     }
 
-    .names {
-      font-family: 'Great Vibes', cursive;
-      font-size: 44px;
-      margin: 10px 0;
-    }
-
-    .heart {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-
-    .date {
-      font-size: 11px;
+    .btn {
+      padding: 12px 28px;
+      border: 1px solid #fff;
+      color: #fff;
+      background: transparent;
+      font-size: 14px;
       letter-spacing: 2px;
-      margin-bottom: 70px;
+      border-radius: 30px;
+      cursor: pointer;
     }
 
-    .guest-title {
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
+    .next-section { justify-content: center; }
 
-    .guest-name {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .bottom-text {
-      font-size: 12px;
-      line-height: 1.8;
-      letter-spacing: 1px;
-    }
-
-    /* Make it feel like mobile vertical card */
-    @media (min-width: 768px) {
-      .container {
-        max-width: 480px;
-      }
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <div class="top-text">WE INVITE YOU TO CELEBRATE OUR WEDDING</div>
-
-    <div class="names">feby & ugi</div>
-
-    <div class="heart">♥</div>
-
-    <div class="date">MINGGU, 31 MEI 2026</div>
-
-    <div class="guest-title">Yth. Bapak/Ibu/Saudara/i</div>
-
-    <div id="guestName" class="guest-name">Guest Name</div>
-
-    <div class="bottom-text">
-      tanpa mengurangi rasa hormat, kami mengundang anda<br>
-      untuk menghadiri acara pernikahan kami.
+  <!-- PAGE 1 -->
+  <section id="page1">
+    <div>
+      <div class="top-text">
+        WE INVITE YOU TO CELEBRATE<br>
+        OUR WEDDING<br>
+      </div>
+      <div class="names">feby & ugi</div>
+      <div>♥</div>
+      <div class="date">MINGGU, 31 MEI 2026</div>
     </div>
 
-  </div>
+    <!-- BUTTON IN MIDDLE -->
+    <div class="middle">
+      <button class="btn" onclick="openInvitation()">BUKA UNDANGAN</button>
+    </div>
+
+    <div>
+      <div>Yth. Bapak/Ibu/Saudara/i</div>
+      <div id="guestName" class="guest-name">Guest Name</div>
+      <div>
+        tanpa mengurangi rasa hormat,<br>
+        kami mengundang anda<br>
+        untuk menghadiri acara pernikahan kami.
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="next-section" id="page2">
+    <div>
+      <h2 style="font-family: Playfair Display; font-weight:400;">Save The Date</h2>
+      <p>Minggu, 31 Mei 2026</p>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
+  <button class="music-btn" onclick="toggleMusic()">♪</button>
 
   <script>
+    // Guest name
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
-
     if (name) {
       document.getElementById("guestName").innerText = decodeURIComponent(name);
     }
+
+    function openInvitation() {
+      // remove page 1
+      document.getElementById("page1").remove();
+
+      // scroll to page 2
+      document.getElementById("page2").scrollIntoView();
+
+      // play music
+      document.getElementById("music").play();
+
+      // block back
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("music");
+      if (music.paused) music.play(); else music.pause();
+    }
   </script>
+
 </body>
 </html>
