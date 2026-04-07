@@ -1,82 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Invitation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      background: #fdf6f0;
       margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #fdf6f0, #f7ebe3);
+      color: #5a3e2b;
+      overflow-x: hidden;
     }
-    .container {
-      padding: 40px 20px;
+
+    .cover {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #8b5e3c, #c8a27a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      z-index: 999;
+      text-align: center;
     }
-    h1 {
-      font-size: 32px;
-      color: #8b5e3c;
-    }
-    h2 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 18px;
-    }
-    .card {
+
+    .cover h1 { font-family: 'Playfair Display', serif; font-size: 36px; }
+    .cover button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
       background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #8b5e3c;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .container {
       max-width: 500px;
       margin: auto;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
     }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      margin: 10px 0;
+    }
+
+    .names {
+      font-size: 28px;
+      margin: 15px 0;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: #c8a27a;
+      margin: 15px auto;
+    }
+
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 15px;
+      padding: 12px 20px;
       background: #8b5e3c;
       color: white;
+      border-radius: 30px;
       text-decoration: none;
-      border-radius: 10px;
+      font-size: 14px;
     }
+
     #countdown {
-      font-size: 20px;
       margin-top: 15px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+
+  <!-- Opening Cover -->
+  <div class="cover" id="cover">
+    <h1>You're Invited</h1>
+    <p id="guestCover">Dear Guest</p>
+    <button onclick="openInvite()">Open Invitation</button>
+  </div>
+
   <div class="container">
     <div class="card">
-      <h1 id="guestName">Dear Guest</h1>
-      <h2>You're Invited!</h2>
-      <p>To the wedding of</p>
-      <h2>Andi & Siti</h2>
+      <h2 id="guestName">Dear Guest</h2>
+      <p>We joyfully invite you to the wedding of</p>
+
+      <div class="names">Andi & Siti</div>
+
+      <div class="divider"></div>
+
       <p>Saturday, 10 August 2026</p>
       <p>Bandung, Indonesia</p>
 
       <div id="countdown"></div>
 
       <a class="btn" href="https://maps.google.com" target="_blank">View Location</a>
+      <br>
+      <a class="btn" href="https://wa.me/?text=I%20will%20attend" target="_blank">RSVP via WhatsApp</a>
+
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486" />
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
+      </div>
     </div>
   </div>
 
-  <audio autoplay loop>
+  <audio id="music" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
   </audio>
 
   <script>
-    // Get guest name from URL
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
+
     if (name) {
-      document.getElementById("guestName").innerText = "Dear " + decodeURIComponent(name);
+      const decoded = decodeURIComponent(name);
+      document.getElementById("guestName").innerText = "Dear " + decoded;
+      document.getElementById("guestCover").innerText = "Dear " + decoded;
     }
 
-    // Countdown Timer
+    function openInvite() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("music").play();
+    }
+
     const weddingDate = new Date("August 10, 2026 10:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -91,5 +171,6 @@
       countdownEl.innerHTML = `${days} days ${hours} hours ${minutes} minutes`;
     }, 1000);
   </script>
+
 </body>
 </html>
