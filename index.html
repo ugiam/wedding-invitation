@@ -1,176 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wedding Invitation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #fdf6f0, #f7ebe3);
-      color: #5a3e2b;
-      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      min-height: 100svh; /* better mobile height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
     }
 
-    .cover {
+    /* Background image (blur + zoom for nicer effect) */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, #8b5e3c, #c8a27a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: white;
-      z-index: 999;
-      text-align: center;
+      background: url('1.jpg') center/cover no-repeat;
+      filter: blur(8px);
+      transform: scale(1.1);
+      z-index: -2;
     }
 
-    .cover h1 { font-family: 'Playfair Display', serif; font-size: 36px; }
-    .cover button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 30px;
-      background: white;
-      color: #8b5e3c;
-      font-weight: bold;
-      cursor: pointer;
+    /* Dark overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
     }
 
     .container {
-      max-width: 500px;
-      margin: auto;
-      padding: 20px;
-      text-align: center;
-      animation: fadeIn 1.5s ease;
+      width: 90%;
+      max-width: 420px; /* mobile-friendly */
+      padding: 40px 20px;
     }
 
-    .card {
-      background: white;
-      border-radius: 25px;
-      padding: 30px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-      margin: 10px 0;
+    .top-text {
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
     }
 
     .names {
-      font-size: 28px;
-      margin: 15px 0;
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px;
+      margin: 10px 0;
     }
 
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: #c8a27a;
-      margin: 15px auto;
+    .heart {
+      font-size: 18px;
+      margin: 10px 0;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      background: #8b5e3c;
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 14px;
+    .date {
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 70px;
     }
 
-    #countdown {
-      margin-top: 15px;
+    .guest-title {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .guest-name {
       font-size: 16px;
-      font-weight: 500;
+      margin-bottom: 20px;
     }
 
-    .gallery img {
-      width: 100%;
-      border-radius: 15px;
-      margin-top: 10px;
+    .bottom-text {
+      font-size: 12px;
+      line-height: 1.8;
+      letter-spacing: 1px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Make it feel like mobile vertical card */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 480px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Opening Cover -->
-  <div class="cover" id="cover">
-    <h1>You're Invited</h1>
-    <p id="guestCover">Dear Guest</p>
-    <button onclick="openInvite()">Open Invitation</button>
-  </div>
-
   <div class="container">
-    <div class="card">
-      <h2 id="guestName">Dear Guest</h2>
-      <p>We joyfully invite you to the wedding of</p>
 
-      <div class="names">Andi & Siti</div>
+    <div class="top-text">WE INVITE YOU TO CELEBRATE OUR WEDDING</div>
 
-      <div class="divider"></div>
+    <div class="names">feby & ugi</div>
 
-      <p>Saturday, 10 August 2026</p>
-      <p>Bandung, Indonesia</p>
+    <div class="heart">♥</div>
 
-      <div id="countdown"></div>
+    <div class="date">MINGGU, 31 MEI 2026</div>
 
-      <a class="btn" href="https://maps.google.com" target="_blank">View Location</a>
-      <br>
-      <a class="btn" href="https://wa.me/?text=I%20will%20attend" target="_blank">RSVP via WhatsApp</a>
+    <div class="guest-title">Yth. Bapak/Ibu/Saudara/i</div>
 
-      <div class="gallery">
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486" />
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
-      </div>
+    <div id="guestName" class="guest-name">Guest Name</div>
+
+    <div class="bottom-text">
+      tanpa mengurangi rasa hormat, kami mengundang anda<br>
+      untuk menghadiri acara pernikahan kami.
     </div>
-  </div>
 
-  <audio id="music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-  </audio>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
 
     if (name) {
-      const decoded = decodeURIComponent(name);
-      document.getElementById("guestName").innerText = "Dear " + decoded;
-      document.getElementById("guestCover").innerText = "Dear " + decoded;
+      document.getElementById("guestName").innerText = decodeURIComponent(name);
     }
-
-    function openInvite() {
-      document.getElementById("cover").style.display = "none";
-      document.getElementById("music").play();
-    }
-
-    const weddingDate = new Date("August 10, 2026 10:00:00").getTime();
-    const countdownEl = document.getElementById("countdown");
-
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = weddingDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-      countdownEl.innerHTML = `${days} days ${hours} hours ${minutes} minutes`;
-    }, 1000);
   </script>
-
 </body>
 </html>
