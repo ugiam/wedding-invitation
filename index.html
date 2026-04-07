@@ -19,6 +19,11 @@
       min-height: 100svh;
       position: relative;
       overflow-x: hidden;
+      overflow-y: hidden; /* 🔥 prevent scroll initially */
+    }
+
+    body.unlocked {
+      overflow-y: auto; /* allow scroll after click */
     }
 
     body::before {
@@ -26,7 +31,7 @@
       position: fixed;
       inset: 0;
       background: url('1.jpg') center/cover no-repeat;
-      filter: blur(8px);
+      filter: blur(2px);
       transform: scale(1.1);
       z-index: -2;
     }
@@ -52,7 +57,11 @@
     .names { font-family: 'Great Vibes', cursive; font-size: 48px; }
     .date { font-family: 'Playfair Display', serif; font-size: 13px; }
 
-    .guest-name { font-family: 'Playfair Display', serif; font-size: 18px; }
+    .guest-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin: 10px 0 20px; /* 🔥 added spacing */
+    }
 
     .middle {
       display: flex;
@@ -93,8 +102,9 @@
   <section id="page1">
     <div>
       <div class="top-text">
-        WE INVITE YOU TO CELEBRATE<br>
-        OUR WEDDING<br>
+        WE INVITE YOU TO CELEBRATE <br>
+        OUR WEDDING <br>
+
       </div>
       <div class="names">feby & ugi</div>
       <div>♥</div>
@@ -108,7 +118,7 @@
 
     <div>
       <div>Yth. Bapak/Ibu/Saudara/i</div>
-      <div id="guestName" class="guest-name">Guest Name</div>
+      <div id="guestName" class="guest-name">H. Koab bin Samsul</div>
       <div>
         tanpa mengurangi rasa hormat,<br>
         kami mengundang anda<br>
@@ -118,16 +128,27 @@
   </section>
 
   <!-- PAGE 2 -->
-  <section class="next-section" id="page2">
-    <div>
-      <h2 style="font-family: Playfair Display; font-weight:400;">Save The Date</h2>
-      <p>Minggu, 31 Mei 2026</p>
+  <section id="page2">
+    <div class="bride-title">
+        <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px;">THE BRIDE</h2>
+        <img src="2.jpg" alt="Prewedding" style="width:100%; max-width:300px; margin-top:20px; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+        
+        <div class="names">Feby Marlia Anwar</div>
+    </div>
+
+    <!-- <img src="2.jpg" alt="Bride" class="bride-img"> -->
+
+
+    <div class="bride-desc">
+      Putri dari<br> 
+      Bapak [Nama Ayah]<br>
+      Ibu [Nama Ibu]
     </div>
   </section>
 
   <!-- MUSIC -->
   <audio id="music" loop>
-    <source src="music.mp3" type="audio/mp3">
+    <source src="Ed Sheeran - Perfect.mp3" type="audio/mp3">
   </audio>
 
   <button class="music-btn" onclick="toggleMusic()">♪</button>
@@ -141,6 +162,9 @@
     }
 
     function openInvitation() {
+      // unlock scroll
+      document.body.classList.add('unlocked');
+
       // remove page 1
       document.getElementById("page1").remove();
 
