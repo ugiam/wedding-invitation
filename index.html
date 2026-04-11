@@ -9,9 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
 
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    section {
+      scroll-snap-align: start;
+    }
+    
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
@@ -248,6 +256,65 @@
         Putri dari<br>
         Bapak Asep Saeful Munawar<br>
         Ibu Lili Marliawati 
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page4" style="justify-content:center; align-items:center;">
+
+    <div>
+      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px; margin-bottom:10px;">
+        THE GROOM
+      </h2>
+
+      <img src="3.jpg"
+        style="
+          width:100%;
+          max-width:300px;
+          margin-top:20px;
+          border-radius:15px;
+          box-shadow:0 4px 20px rgba(0,0,0,0.3);
+          opacity:0;
+          transform:scale(0.95);
+          animation: fadeZoom 1s ease forwards;
+        ">
+
+      <div class="names"
+        style="
+          font-size:36px;
+          margin:15px 0 10px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.3s;
+        ">
+        Ugi Abdul Muchyi Sunanto
+      </div>
+
+      <!-- Divider -->
+      <div
+        style="
+          width:60px;
+          height:1px;
+          background:rgba(255,255,255,0.5);
+          margin:10px auto 15px;
+          opacity:0;
+          animation: fadeIn 1s ease forwards;
+          animation-delay:0.6s;
+        ">
+      </div>
+
+      <div
+        style="
+          line-height:1.8;
+          font-size:13px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.9s;
+        ">
+        Putra dari<br>
+        Bapak Sunanto<br>
+        Ibu Ropiah
       </div>
     </div>
 
