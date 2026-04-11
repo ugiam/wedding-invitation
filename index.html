@@ -128,6 +128,28 @@
       border-radius: 50%;
       cursor: pointer;
     }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeZoom {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -172,23 +194,68 @@
   </section>
 
   <!-- PAGE 3 -->
-  <section id="page3">
-    <div>
-      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px;">THE BRIDE</h2>
-      <img src="2.jpg" style="width:100%; max-width:300px; margin-top:20px; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
-      <div class="names" style="font-size: 36px; margin: 10px 0 20px;">Feby Marlia Anwar S.Si</div>
-    </div>
+  <section id="page3" style="justify-content:center; align-items:center;">
 
     <div>
-      Putri dari<br>
-      Bapak [Nama Ayah]<br>
-      Ibu [Nama Ibu]
+      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px; margin-bottom:10px;">
+        THE BRIDE
+      </h2>
+
+      <img src="2.jpg"
+        style="
+          width:100%;
+          max-width:300px;
+          margin-top:20px;
+          border-radius:15px;
+          box-shadow:0 4px 20px rgba(0,0,0,0.3);
+          opacity:0;
+          transform:scale(0.95);
+          animation: fadeZoom 1s ease forwards;
+        ">
+
+      <div class="names"
+        style="
+          font-size:36px;
+          margin:15px 0 10px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.3s;
+        ">
+        Feby Marlia Anwar
+      </div>
+
+      <!-- Divider -->
+      <div
+        style="
+          width:60px;
+          height:1px;
+          background:rgba(255,255,255,0.5);
+          margin:10px auto 15px;
+          opacity:0;
+          animation: fadeIn 1s ease forwards;
+          animation-delay:0.6s;
+        ">
+      </div>
+
+      <div
+        style="
+          line-height:1.8;
+          font-size:13px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.9s;
+        ">
+        Putri dari<br>
+        Bapak Asep Saeful Munawar<br>
+        Ibu Lili Marliawati 
+      </div>
     </div>
+
   </section>
 
   <!-- MUSIC -->
   <audio id="music" loop>
-    <source src="Ed Sheeran - Perfect.mp3" type="audio/mp3">
+    <source src="Coldiac - Vow (Alternate version).mp3" type="audio/mp3">
   </audio>
 
   <button class="music-btn" onclick="toggleMusic()">♪</button>
@@ -211,7 +278,9 @@
         page2.classList.add('show');
       }, 200);
 
-      document.getElementById("music").play();
+      const music = document.getElementById("music");
+      music.currentTime = 3; // start from 3 seconds
+      music.play();
 
       history.pushState(null, null, location.href);
       window.onpopstate = function () {
