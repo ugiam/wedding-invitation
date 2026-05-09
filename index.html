@@ -36,12 +36,12 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: url('1.jpg') center/cover no-repeat;
-      filter: blur(2px);
+      background: url('5.jpg') center/cover no-repeat;
+      filter: blur(1px);
       transform: scale(1.1);
       z-index: -2;
     }
-
+    
     body::after {
       content: "";
       position: fixed;
@@ -74,7 +74,7 @@
 
     .top-text { font-size: 12px; letter-spacing: 3px; }
     .names { font-family: 'Great Vibes', cursive; font-size: 48px; }
-    .date { font-family: 'Playfair Display', serif; font-size: 13px; }
+    .date { font-family: 'Playfair Display', serif; font-size: 16px; }
 
     .guest-name {
       font-family: 'Playfair Display', serif;
@@ -158,6 +158,51 @@
         transform: scale(1);
       }
     }
+
+    .gift-card {
+      border:1px solid rgba(255,255,255,0.3);
+      border-radius:20px;
+      padding:20px;
+      margin-bottom:20px;
+      backdrop-filter: blur(5px);
+
+      opacity:0;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .gift-title {
+      font-size:12px;
+      letter-spacing:2px;
+      margin-bottom:10px;
+    }
+
+    .gift-number {
+      font-family:'Playfair Display', serif;
+      font-size:24px;
+      margin-bottom:8px;
+    }
+
+    .gift-name {
+      font-size:13px;
+      margin-bottom:15px;
+    }
+
+    .copy-btn {
+      padding:10px 20px;
+      border:1px solid rgba(255,255,255,0.5);
+      background:transparent;
+      color:white;
+      border-radius:30px;
+      font-size:11px;
+      letter-spacing:2px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .copy-btn:hover {
+      background:rgba(255,255,255,0.15);
+    }
+
   </style>
 </head>
 <body>
@@ -178,11 +223,6 @@
     <div>
       <div>Yth. Bapak/Ibu/Saudara/i</div>
       <div id="guestName" class="guest-name">Guest Name</div>
-      <div>
-        tanpa mengurangi rasa hormat,<br>
-        kami mengundang anda<br>
-        untuk menghadiri acara pernikahan kami.
-      </div>
     </div>
   </section>
 
@@ -209,7 +249,7 @@
         THE BRIDE
       </h2>
 
-      <img src="2.jpg"
+      <img src="6.jpg"
         style="
           width:100%;
           max-width:300px;
@@ -268,7 +308,7 @@
         THE GROOM
       </h2>
 
-      <img src="3.jpg"
+      <img src="7.jpg"
         style="
           width:100%;
           max-width:300px;
@@ -320,9 +360,245 @@
 
   </section>
 
+  <section id="page5" style="justify-content:center; align-items:center;">
+
+    <div style="max-width:350px; width:100%;">
+
+      <!-- Luxury Title -->
+      <div
+        style="
+          margin-bottom:30px;
+          line-height:0.9;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+        ">
+
+        <div
+          style="
+            font-family:'Playfair Display', serif;
+            font-size:64px;
+            letter-spacing:2px;
+            font-weight:400;
+          ">
+          SAVE
+        </div>
+
+        <div
+          style="
+            font-family:'Great Vibes', cursive;
+            font-size:68px;
+            margin-top:-10px;
+          ">
+          the Date
+        </div>
+
+      </div>
+
+      <!-- Date -->
+      <div
+        style="
+          font-family:'Playfair Display', serif;
+          font-size:38px;
+          line-height:1.4;
+          margin-bottom:25px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.2s;
+        ">
+        Minggu,<br>
+        31 Mei 2026
+      </div>
+
+      <!-- Divider -->
+      <div
+        style="
+          width:70px;
+          height:1px;
+          background:rgba(255,255,255,0.5);
+          margin:0 auto 25px;
+          opacity:0;
+          animation: fadeIn 1s ease forwards;
+          animation-delay:0.4s;
+        ">
+      </div>
+
+      <!-- Event -->
+      <div
+        style="
+          font-size:12px;
+          letter-spacing:2px;
+          margin-bottom:15px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.5s;
+        ">
+        AKAD DAN RESEPSI<br>
+        Pukul 7.30 s/d 11.30 WIB
+      </div>
+
+      <!-- Venue -->
+      <div
+        style="
+          line-height:1.5;
+          font-size:13px;
+          margin-bottom:35px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.6s;
+        ">
+        Pawon Joglo Kuningan<br>
+        Jl. Siliwangi No.172, Kec. Jalaksana,<br>
+        Kabupaten Kuningan,Jawa Barat<br>
+        (Masuk Lewat SPBU)<br>
+      </div>
+
+      <!-- Maps Button -->
+      <a href="https://maps.app.goo.gl/93jtjRbytttCtce58"
+        target="_blank"
+        style="
+          display:inline-block;
+          padding:12px 28px;
+          border:1px solid white;
+          border-radius:30px;
+          color:white;
+          text-decoration:none;
+          font-size:12px;
+          letter-spacing:2px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.8s;
+          transition:0.3s;
+        ">
+        GOOGLE MAPS
+      </a>
+
+    </div>
+
+  </section>
+
+  <section id="page6" style="justify-content:center; align-items:center;">
+
+    <div style="max-width:350px; width:100%;">
+
+      <!-- Title -->
+      <div
+        style="
+          margin-bottom:30px;
+          line-height:0.9;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+        ">
+
+        <div
+          style="
+            font-family:'Great Vibes';
+            font-size:64px;
+            margin-top:-10px;
+          ">
+          Wedding Gift
+        </div>
+
+      </div>
+
+      <!-- Description
+      <div
+        style="
+          line-height:1.9;
+          font-size:13px;
+          margin-bottom:35px;
+          opacity:0;
+          animation: fadeUp 1s ease forwards;
+          animation-delay:0.2s;
+        ">
+        Doa restu anda merupakan karunia yang sangat berarti bagi kami.<br>
+        Namun jika memberi adalah ungkapan tanda kasih,<br>
+        anda dapat memberikan hadiah melalui:
+      </div> -->
+
+      <!-- BANK 1 -->
+      <div class="gift-card">
+
+        <div class="gift-title">BANK BCA</div>
+
+        <div class="gift-number" id="bca-number">
+          2991406338
+        </div>
+
+        <div class="gift-name">
+          Feby Marlia Anwar
+        </div>
+
+        <button class="copy-btn"
+          onclick="copyText('2991406338')">
+          COPY
+        </button>
+
+      </div>
+
+      <!-- BANK 2 -->
+      <div class="gift-card">
+
+        <div class="gift-title">BANK MANDIRI</div>
+
+        <div class="gift-number">
+          1310019488354
+        </div>
+
+        <div class="gift-name">
+          Ugi Abdul Muchyi
+        </div>
+
+        <button class="copy-btn"
+          onclick="copyText('1310019488354')">
+          COPY
+        </button>
+
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="gift-card">
+
+        <div class="gift-title">
+          KIRIM HADIAH
+        </div>
+
+        <div
+          class="gift-name"
+          style="line-height:1.8; margin-top:10px;"
+          id="gift-address">
+
+          Ugi Abdul Muchyi - 085157330757<br>
+          Jl. Bojong Kaler No. 51 RT.003 RW.012,<br>
+          Cigadung, Cibeunying Kaler,<br>
+          Kota Bandung.<br>
+          40191
+
+        </div>
+
+        <button class="copy-btn"
+          onclick="copyText('Jl. Bojong Kaler No. 51 RT.003 RW.012, Cigadung, Cibeunying Kaler, Kota Bandung.')">
+          COPY ADDRESS
+        </button>
+
+      </div>
+
+      <!-- Thank You -->
+      <div style="
+        margin-top:50px;
+        font-size:12px;
+        letter-spacing:2px;
+        opacity:0.7;
+      ">
+        THANK YOU
+      </div>
+
+    </div>
+
+  </section>
+
   <!-- MUSIC -->
   <audio id="music" loop>
-    <source src="Coldiac - Vow (Alternate version).mp3" type="audio/mp3">
+    <source src="Arctic Monkeys - Baby I'm Yours.mp3" type="audio/mp3">
   </audio>
 
   <button class="music-btn" onclick="toggleMusic()">♪</button>
@@ -346,7 +622,7 @@
       }, 200);
 
       const music = document.getElementById("music");
-      music.currentTime = 3; // start from 3 seconds
+      music.currentTime = 15; // start from 3 seconds
       music.play();
 
       history.pushState(null, null, location.href);
@@ -359,6 +635,13 @@
       const music = document.getElementById("music");
       if (music.paused) music.play(); else music.pause();
     }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+
+      alert("Copied!");
+    }
+
   </script>
 
 </body>
