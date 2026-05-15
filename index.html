@@ -3,646 +3,666 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan</title>
+  <title>Undangan Pernikahan — Feby & Ugi</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --accent:       #E8C4C4;
+      --accent-light: #ffffff;
+      --accent-dim:   rgba(232,196,196,0.18);
+      --cream:        rgba(255,245,245,0.92);
+      --glass:        rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.25);
+    }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     html {
       scroll-behavior: smooth;
       scroll-snap-type: y mandatory;
     }
 
-    section {
-      scroll-snap-align: start;
-    }
-    
     body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
       color: #fff;
       min-height: 100svh;
-      position: relative;
       overflow-x: hidden;
       overflow-y: hidden;
     }
 
     body.unlocked { overflow-y: auto; }
 
+    /* ── background ── */
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      background: url('5.jpg') center/cover no-repeat;
-      filter: blur(1px);
-      transform: scale(1.1);
-      z-index: -2;
+      position: fixed; inset: 0;
+      background: url('5.jpg') center / cover no-repeat;
+      filter: blur(2px) brightness(0.6);
+      transform: scale(1.08);
+      z-index: -3;
     }
-    
     body::after {
       content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: -1;
+      position: fixed; inset: 0;
+      background: linear-gradient(160deg, rgba(30,18,8,.55) 0%, rgba(10,8,5,.65) 100%);
+      z-index: -2;
     }
 
+    /* ── falling petals ── */
+    #petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .petal {
+      position: absolute;
+      top: -40px;
+      width: 10px; height: 14px;
+      border-radius: 50% 10% 50% 10%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,210,210,0.5), rgba(255,255,255,0.12));
+      animation: fall linear infinite;
+      opacity: 0;
+    }
+    @keyframes fall {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(1); }
+      5%   { opacity: 1; }
+      90%  { opacity: .6; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(540deg) scale(.6); }
+    }
+
+    /* ── sections ── */
     section {
+      scroll-snap-align: start;
       min-height: 100svh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .center-page {
-      justify-content: center !important;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-
-    .center-page.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .top-text { font-size: 12px; letter-spacing: 3px; }
-    .names { font-family: 'Great Vibes', cursive; font-size: 48px; }
-    .date { font-family: 'Playfair Display', serif; font-size: 16px; }
-
-    .guest-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      margin: 10px 0 20px;
-    }
-
-    .middle {
-      display: flex;
       justify-content: center;
       align-items: center;
-      margin: 20px 0;
+      text-align: center;
+      padding: 48px 24px;
+      position: relative;
+      z-index: 1;
     }
 
-    .btn {
-      padding: 12px 28px;
-      border: 1px solid #fff;
-      color: #fff;
-      background: transparent;
-      font-size: 14px;
-      letter-spacing: 2px;
-      border-radius: 30px;
-      cursor: pointer;
+    /* ── ornament ── */
+    .ornament {
+      width: 180px; height: 24px;
+      margin: 16px auto;
+      opacity: .55;
+      display: block;
     }
+
+    .line-ornament {
+      display: flex; align-items: center; gap: 12px;
+      justify-content: center;
+      margin: 14px auto;
+    }
+    .line-ornament span {
+      display: block; height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      width: 70px;
+    }
+    .line-ornament svg { flex-shrink: 0; }
+
+    /* ── typography ── */
+    .label {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--accent-light);
+      text-transform: uppercase;
+    }
+
+    .script {
+      font-family: 'Great Vibes', cursive;
+      color: var(--accent-light);
+    }
+
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ── PAGE 1 ── */
+    #page1 { justify-content: space-between; padding: 56px 24px; }
+
+    .p1-top { }
+    .p1-top .label { margin-bottom: 20px; }
+    .p1-names { font-family: 'Great Vibes', cursive; font-size: clamp(52px,14vw,72px); color: var(--accent-light); line-height: 1; }
+    .p1-heart { color: var(--accent); font-size: 20px; margin: 8px 0; }
+    .p1-date { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 4px; color: rgba(255,255,255,.8); }
+
+    .p1-open-btn {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid var(--accent);
+      color: var(--accent-light);
+      background: rgba(255,255,255,0.07);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .p1-open-btn::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% -20%, rgba(232,196,196,0.18), transparent 70%);
+    }
+    .p1-open-btn:hover { background: rgba(255,255,255,0.12); box-shadow: 0 0 24px rgba(232,196,196,0.25); }
+
+    .p1-guest { }
+    .p1-guest .label { margin-bottom: 8px; }
+    .p1-guest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--accent-light);
+    }
+
+    /* ── PAGE 2 ── */
+    #page2 { opacity: 0; transform: translateY(30px); transition: opacity 1.2s ease, transform 1.2s ease; }
+    #page2.show { opacity: 1; transform: translateY(0); }
+    .p2-names { font-family: 'Great Vibes', cursive; font-size: clamp(56px,16vw,80px); color: var(--accent-light); line-height: 1.1; }
 
     .scroll-hint {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 12px;
-      letter-spacing: 2px;
-      opacity: 0;
-      animation: fadeIn 2s ease 1.5s forwards;
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      font-size: 9px; letter-spacing: 4px; color: var(--accent-light);
+      opacity: 0; animation: fadeIn 2s ease 1.8s forwards;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .scroll-hint .chevrons { display: flex; flex-direction: column; align-items: center; gap: -4px; animation: bounce2 2s infinite; }
+    @keyframes bounce2 {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(7px); }
     }
 
+    /* ── BRIDE / GROOM pages ── */
+    .bio-wrap { max-width: 320px; width: 100%; }
+    .bio-section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px,10vw,52px);
+      font-weight: 300;
+      letter-spacing: 6px;
+      color: var(--accent-light);
+    }
+    .bio-photo {
+      width: 100%; max-width: 260px;
+      border-radius: 180px 180px 20px 20px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,.5), 0 0 0 1px var(--glass-border);
+      opacity: 0; transform: scale(.94);
+      animation: fadeZoom 1.1s ease forwards;
+    }
+    .bio-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: var(--accent-light);
+      opacity: 0;
+      animation: fadeUp 1s ease .3s forwards;
+    }
+    .bio-info {
+      font-size: 12px;
+      letter-spacing: 1px;
+      line-height: 2;
+      color: rgba(255,255,255,.75);
+      opacity: 0;
+      animation: fadeUp 1s ease .6s forwards;
+    }
+
+    /* ── SAVE THE DATE ── */
+    .std-wrap { max-width: 340px; width: 100%; }
+    .std-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px,14vw,68px);
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: var(--accent-light);
+      line-height: .9;
+      opacity: 0; animation: fadeUp 1s ease forwards;
+    }
+    .std-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(48px,13vw,64px);
+      color: var(--accent-light);
+      margin-top: -6px;
+      opacity: 0; animation: fadeUp 1s ease .15s forwards;
+    }
+    .std-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px,8vw,42px);
+      font-weight: 300;
+      line-height: 1.3;
+      opacity: 0; animation: fadeUp 1s ease .3s forwards;
+    }
+    .std-detail {
+      font-size: 11px;
+      letter-spacing: 3px;
+      line-height: 2;
+      color: rgba(255,255,255,.8);
+      opacity: 0; animation: fadeUp 1s ease .5s forwards;
+    }
+    .std-venue {
+      font-size: 13px;
+      line-height: 1.9;
+      color: rgba(255,255,255,.75);
+      opacity: 0; animation: fadeUp 1s ease .65s forwards;
+    }
+    .maps-btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border: 1px solid var(--accent);
+      border-radius: 40px;
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 4px;
+      transition: .3s;
+      opacity: 0; animation: fadeUp 1s ease .8s forwards;
+      background: rgba(255,255,255,0.06);
+    }
+    .maps-btn:hover { background: rgba(255,255,255,0.12); box-shadow: 0 0 20px rgba(255,255,255,0.12); }
+
+    /* ── GIFT ── */
+    .gift-wrap { max-width: 340px; width: 100%; }
+    .gift-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(50px,13vw,64px);
+      color: var(--accent-light);
+      opacity: 0; animation: fadeUp 1s ease forwards;
+    }
+
+    .gift-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 22px 20px 18px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+    }
+    .gift-card:nth-child(2) { animation-delay: .1s; }
+    .gift-card:nth-child(3) { animation-delay: .2s; }
+    .gift-card:nth-child(4) { animation-delay: .3s; }
+
+    .gift-bank-label {
+      font-size: 9px; letter-spacing: 4px;
+      color: #fff; margin-bottom: 10px;
+    }
+    .gift-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; letter-spacing: 2px;
+      color: var(--accent-light); margin-bottom: 6px;
+    }
+    .gift-holder { font-size: 12px; color: rgba(255,255,255,.7); margin-bottom: 16px; letter-spacing: 1px; }
+
+    .copy-btn {
+      padding: 8px 22px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      color: var(--accent-light);
+      border-radius: 30px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      transition: .3s;
+    }
+    .copy-btn:hover { background: var(--accent-dim); }
+    .copy-btn.copied { color: #f0d4d4; border-color: rgba(232,196,196,.5); }
+
+    .gift-address-text { font-size: 12px; line-height: 2; color: rgba(255,255,255,.75); margin-bottom: 16px; }
+
+    .gift-thankyou {
+      margin-top: 40px;
+      font-size: 10px; letter-spacing: 6px;
+      color: rgba(255,255,255,.6);
+    }
+
+    /* ── music btn ── */
+    .music-btn {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      transition: .3s;
+    }
+    .music-btn:hover { background: rgba(255,255,255,0.18); }
+    .music-btn.playing { animation: pulse-ring 2.5s ease infinite; }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+      70%  { box-shadow: 0 0 0 10px rgba(232,196,196,0); }
+      100% { box-shadow: 0 0 0 0 rgba(232,196,196,0); }
+    }
+
+    /* ── shared keyframes ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeZoom {
+      from { opacity: 0; transform: scale(.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
     @keyframes fadeIn {
       to { opacity: 1; }
     }
 
-    .arrow {
-      margin-top: 5px;
-      animation: bounce 1.5s infinite;
+    /* ── decorative corner (page 2) ── */
+    .corner-deco {
+      position: absolute; width: 80px; height: 80px;
+      opacity: .3;
     }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
-
-    .music-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeZoom {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .gift-card {
-      border:1px solid rgba(255,255,255,0.3);
-      border-radius:20px;
-      padding:20px;
-      margin-bottom:20px;
-      backdrop-filter: blur(5px);
-
-      opacity:0;
-      animation: fadeUp 1s ease forwards;
-    }
-
-    .gift-title {
-      font-size:12px;
-      letter-spacing:2px;
-      margin-bottom:10px;
-    }
-
-    .gift-number {
-      font-family:'Playfair Display', serif;
-      font-size:24px;
-      margin-bottom:8px;
-    }
-
-    .gift-name {
-      font-size:13px;
-      margin-bottom:15px;
-    }
-
-    .copy-btn {
-      padding:10px 20px;
-      border:1px solid rgba(255,255,255,0.5);
-      background:transparent;
-      color:white;
-      border-radius:30px;
-      font-size:11px;
-      letter-spacing:2px;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    .copy-btn:hover {
-      background:rgba(255,255,255,0.15);
-    }
-
+    .corner-tl { top: 24px; left: 24px; }
+    .corner-tr { top: 24px; right: 24px; transform: scaleX(-1); }
+    .corner-bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
+    .corner-br { bottom: 24px; right: 24px; transform: scale(-1,-1); }
   </style>
 </head>
 <body>
 
-  <!-- PAGE 1 -->
-  <section id="page1">
-    <div>
-      <div class="top-text">WE INVITE YOU TO CELEBRATE <br> OUR WEDDING</div>
-      <div class="names">feby & ugi</div>
-      <div>♥</div>
-      <div class="date">MINGGU, 31 MEI 2026</div>
+<!-- Petals canvas -->
+<div id="petals"></div>
+
+<!-- ════════ PAGE 1 — Cover ════════ -->
+<section id="page1">
+
+  <div class="p1-top">
+    <div class="label">YOU ARE INVITED TO CELEBRATE</div>
+    <div class="p1-names">feby &amp; ugi</div>
+    <div class="p1-heart">✦</div>
+    <div class="p1-date">MINGGU &nbsp;·&nbsp; 31 MEI 2026</div>
+  </div>
+
+  <div>
+    <button class="p1-open-btn" onclick="openInvitation()">BUKA UNDANGAN</button>
+  </div>
+
+  <div class="p1-guest">
+    <div class="label">Yth. Bapak / Ibu / Saudara/i</div>
+    <div id="guestName" class="p1-guest-name">Nama Tamu</div>
+  </div>
+
+</section>
+
+<!-- ════════ PAGE 2 — Hero ════════ -->
+<section id="page2">
+
+  <!-- corner ornaments -->
+  <svg class="corner-deco corner-tl" viewBox="0 0 80 80" fill="none">
+    <path d="M4 76 L4 4 L76 4" stroke="#E8C4C4" stroke-width="1"/>
+    <path d="M4 44 Q4 4 44 4" stroke="#E8C4C4" stroke-width=".6" fill="none"/>
+    <circle cx="4" cy="4" r="3" fill="#E8C4C4"/>
+  </svg>
+  <svg class="corner-deco corner-tr" viewBox="0 0 80 80" fill="none">
+    <path d="M4 76 L4 4 L76 4" stroke="#E8C4C4" stroke-width="1"/>
+    <path d="M4 44 Q4 4 44 4" stroke="#E8C4C4" stroke-width=".6" fill="none"/>
+    <circle cx="4" cy="4" r="3" fill="#E8C4C4"/>
+  </svg>
+  <svg class="corner-deco corner-bl" viewBox="0 0 80 80" fill="none">
+    <path d="M4 76 L4 4 L76 4" stroke="#E8C4C4" stroke-width="1"/>
+    <path d="M4 44 Q4 4 44 4" stroke="#E8C4C4" stroke-width=".6" fill="none"/>
+    <circle cx="4" cy="4" r="3" fill="#E8C4C4"/>
+  </svg>
+  <svg class="corner-deco corner-br" viewBox="0 0 80 80" fill="none">
+    <path d="M4 76 L4 4 L76 4" stroke="#E8C4C4" stroke-width="1"/>
+    <path d="M4 44 Q4 4 44 4" stroke="#E8C4C4" stroke-width=".6" fill="none"/>
+    <circle cx="4" cy="4" r="3" fill="#E8C4C4"/>
+  </svg>
+
+  <div class="label" style="margin-bottom:18px;">WE ARE GETTING MARRIED</div>
+
+  <div class="p2-names">feby &amp; ugi</div>
+
+  <!-- ornament divider -->
+  <svg viewBox="0 0 220 20" class="ornament">
+    <line x1="0" y1="10" x2="80" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+    <polygon points="90,10 98,5 106,10 98,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+    <circle cx="110" cy="10" r="3" fill="#E8C4C4"/>
+    <polygon points="114,10 122,5 130,10 122,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+    <line x1="140" y1="10" x2="220" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+  </svg>
+
+  <div style="font-family:'Cormorant Garamond',serif; font-size:15px; letter-spacing:5px; color:rgba(255,255,255,.75); margin-top:6px;">
+    31 MEI 2026
+  </div>
+
+  <div class="scroll-hint">
+    SCROLL
+    <div class="chevrons">
+      <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="#E8C4C4" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+      <svg width="14" height="8" viewBox="0 0 14 8" style="opacity:.5;margin-top:-3px"><path d="M1 1l6 6 6-6" stroke="#E8C4C4" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════ PAGE 3 — Bride ════════ -->
+<section id="page3">
+  <div class="bio-wrap">
+
+    <div class="bio-section-label">THE BRIDE</div>
+
+    <div class="line-ornament" style="opacity:.6;">
+      <span></span>
+      <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#E8C4C4"/></svg>
+      <span></span>
     </div>
 
-    <div class="middle">
-      <button class="btn" onclick="openInvitation()">BUKA UNDANGAN</button>
+    <img src="6.jpg" class="bio-photo" alt="Feby">
+
+    <div class="bio-name">Feby Marlia Anwar</div>
+
+    <div class="line-ornament" style="margin:12px auto; opacity:.45;">
+      <span style="width:50px"></span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M4 0 L5.5 3 L8 3 L6 5 L7 8 L4 6 L1 8 L2 5 L0 3 L2.5 3Z" fill="#E8C4C4"/></svg>
+      <span style="width:50px"></span>
     </div>
 
-    <div>
-      <div>Yth. Bapak/Ibu/Saudara/i</div>
-      <div id="guestName" class="guest-name">Guest Name</div>
-    </div>
-  </section>
-
-  <!-- PAGE 2 -->
-  <section id="page2" class="center-page">
-    <div>
-      <div class="top-text">WE INVITE YOU TO CELEBRATE <br> OUR WEDDING</div>
-      <div class="names">feby & ugi</div>
-      <div>♥</div>
-      <div class="date">MINGGU, 31 MEI 2026</div>
+    <div class="bio-info">
+      Putri dari<br>
+      Bapak Asep Saeful Munawar<br>
+      &amp; Ibu Lili Marliawati
     </div>
 
-    <div class="scroll-hint">
-      SCROLL DOWN
-      <div class="arrow">↓</div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PAGE 3 -->
-  <section id="page3" style="justify-content:center; align-items:center;">
+<!-- ════════ PAGE 4 — Groom ════════ -->
+<section id="page4">
+  <div class="bio-wrap">
 
-    <div>
-      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px; margin-bottom:10px;">
-        THE BRIDE
-      </h2>
+    <div class="bio-section-label">THE GROOM</div>
 
-      <img src="6.jpg"
-        style="
-          width:100%;
-          max-width:300px;
-          margin-top:20px;
-          border-radius:15px;
-          box-shadow:0 4px 20px rgba(0,0,0,0.3);
-          opacity:0;
-          transform:scale(0.95);
-          animation: fadeZoom 1s ease forwards;
-        ">
-
-      <div class="names"
-        style="
-          font-size:36px;
-          margin:15px 0 10px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.3s;
-        ">
-        Feby Marlia Anwar
-      </div>
-
-      <!-- Divider -->
-      <div
-        style="
-          width:60px;
-          height:1px;
-          background:rgba(255,255,255,0.5);
-          margin:10px auto 15px;
-          opacity:0;
-          animation: fadeIn 1s ease forwards;
-          animation-delay:0.6s;
-        ">
-      </div>
-
-      <div
-        style="
-          line-height:1.8;
-          font-size:13px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.9s;
-        ">
-        Putri dari<br>
-        Bapak Asep Saeful Munawar<br>
-        Ibu Lili Marliawati 
-      </div>
+    <div class="line-ornament" style="opacity:.6;">
+      <span></span>
+      <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="#E8C4C4"/></svg>
+      <span></span>
     </div>
 
-  </section>
+    <img src="7.jpg" class="bio-photo" alt="Ugi">
 
-  <section id="page4" style="justify-content:center; align-items:center;">
+    <div class="bio-name">Ugi Abdul Muchyi Sunanto</div>
 
-    <div>
-      <h2 style="font-family: Playfair Display; font-weight:400; font-size: 48px; margin-bottom:10px;">
-        THE GROOM
-      </h2>
-
-      <img src="7.jpg"
-        style="
-          width:100%;
-          max-width:300px;
-          margin-top:20px;
-          border-radius:15px;
-          box-shadow:0 4px 20px rgba(0,0,0,0.3);
-          opacity:0;
-          transform:scale(0.95);
-          animation: fadeZoom 1s ease forwards;
-        ">
-
-      <div class="names"
-        style="
-          font-size:36px;
-          margin:15px 0 10px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.3s;
-        ">
-        Ugi Abdul Muchyi Sunanto
-      </div>
-
-      <!-- Divider -->
-      <div
-        style="
-          width:60px;
-          height:1px;
-          background:rgba(255,255,255,0.5);
-          margin:10px auto 15px;
-          opacity:0;
-          animation: fadeIn 1s ease forwards;
-          animation-delay:0.6s;
-        ">
-      </div>
-
-      <div
-        style="
-          line-height:1.8;
-          font-size:13px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.9s;
-        ">
-        Putra dari<br>
-        Bapak Sunanto<br>
-        Ibu Ropiah
-      </div>
+    <div class="line-ornament" style="margin:12px auto; opacity:.45;">
+      <span style="width:50px"></span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M4 0 L5.5 3 L8 3 L6 5 L7 8 L4 6 L1 8 L2 5 L0 3 L2.5 3Z" fill="#E8C4C4"/></svg>
+      <span style="width:50px"></span>
     </div>
 
-  </section>
-
-  <section id="page5" style="justify-content:center; align-items:center;">
-
-    <div style="max-width:350px; width:100%;">
-
-      <!-- Luxury Title -->
-      <div
-        style="
-          margin-bottom:30px;
-          line-height:0.9;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-        ">
-
-        <div
-          style="
-            font-family:'Playfair Display', serif;
-            font-size:64px;
-            letter-spacing:2px;
-            font-weight:400;
-          ">
-          SAVE
-        </div>
-
-        <div
-          style="
-            font-family:'Great Vibes', cursive;
-            font-size:68px;
-            margin-top:-10px;
-          ">
-          the Date
-        </div>
-
-      </div>
-
-      <!-- Date -->
-      <div
-        style="
-          font-family:'Playfair Display', serif;
-          font-size:38px;
-          line-height:1.4;
-          margin-bottom:25px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.2s;
-        ">
-        Minggu,<br>
-        31 Mei 2026
-      </div>
-
-      <!-- Divider -->
-      <div
-        style="
-          width:70px;
-          height:1px;
-          background:rgba(255,255,255,0.5);
-          margin:0 auto 25px;
-          opacity:0;
-          animation: fadeIn 1s ease forwards;
-          animation-delay:0.4s;
-        ">
-      </div>
-
-      <!-- Event -->
-      <div
-        style="
-          font-size:12px;
-          letter-spacing:2px;
-          margin-bottom:15px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.5s;
-        ">
-        AKAD DAN RESEPSI<br>
-        Pukul 7.30 s/d 11.30 WIB
-      </div>
-
-      <!-- Venue -->
-      <div
-        style="
-          line-height:1.5;
-          font-size:13px;
-          margin-bottom:35px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.6s;
-        ">
-        Pawon Joglo Kuningan<br>
-        Jl. Siliwangi No.172, Kec. Jalaksana,<br>
-        Kabupaten Kuningan,Jawa Barat<br>
-        (Masuk Lewat SPBU)<br>
-      </div>
-
-      <!-- Maps Button -->
-      <a href="https://maps.app.goo.gl/93jtjRbytttCtce58"
-        target="_blank"
-        style="
-          display:inline-block;
-          padding:12px 28px;
-          border:1px solid white;
-          border-radius:30px;
-          color:white;
-          text-decoration:none;
-          font-size:12px;
-          letter-spacing:2px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.8s;
-          transition:0.3s;
-        ">
-        GOOGLE MAPS
-      </a>
-
+    <div class="bio-info">
+      Putra dari<br>
+      Bapak Sunanto<br>
+      &amp; Ibu Ropiah
     </div>
 
-  </section>
+  </div>
+</section>
 
-  <section id="page6" style="justify-content:center; align-items:center;">
+<!-- ════════ PAGE 5 — Save the Date ════════ -->
+<section id="page5">
+  <div class="std-wrap">
 
-    <div style="max-width:350px; width:100%;">
+    <div class="std-headline">SAVE</div>
+    <div class="std-script">the Date</div>
 
-      <!-- Title -->
-      <div
-        style="
-          margin-bottom:30px;
-          line-height:0.9;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-        ">
+    <svg viewBox="0 0 220 20" class="ornament" style="margin:20px auto;">
+      <line x1="0" y1="10" x2="80" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+      <polygon points="90,10 98,5 106,10 98,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+      <circle cx="110" cy="10" r="3" fill="#E8C4C4"/>
+      <polygon points="114,10 122,5 130,10 122,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+      <line x1="140" y1="10" x2="220" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+    </svg>
 
-        <div
-          style="
-            font-family:'Great Vibes';
-            font-size:64px;
-            margin-top:-10px;
-          ">
-          Wedding Gift
-        </div>
+    <div class="std-date">Minggu,<br>31 Mei 2026</div>
 
-      </div>
-
-      <!-- Description
-      <div
-        style="
-          line-height:1.9;
-          font-size:13px;
-          margin-bottom:35px;
-          opacity:0;
-          animation: fadeUp 1s ease forwards;
-          animation-delay:0.2s;
-        ">
-        Doa restu anda merupakan karunia yang sangat berarti bagi kami.<br>
-        Namun jika memberi adalah ungkapan tanda kasih,<br>
-        anda dapat memberikan hadiah melalui:
-      </div> -->
-
-      <!-- BANK 1 -->
-      <div class="gift-card">
-
-        <div class="gift-title">BANK BCA</div>
-
-        <div class="gift-number" id="bca-number">
-          2991406338
-        </div>
-
-        <div class="gift-name">
-          Feby Marlia Anwar
-        </div>
-
-        <button class="copy-btn"
-          onclick="copyText('2991406338')">
-          COPY
-        </button>
-
-      </div>
-
-      <!-- BANK 2 -->
-      <div class="gift-card">
-
-        <div class="gift-title">BANK MANDIRI</div>
-
-        <div class="gift-number">
-          1310019488354
-        </div>
-
-        <div class="gift-name">
-          Ugi Abdul Muchyi
-        </div>
-
-        <button class="copy-btn"
-          onclick="copyText('1310019488354')">
-          COPY
-        </button>
-
-      </div>
-
-      <!-- ADDRESS -->
-      <div class="gift-card">
-
-        <div class="gift-title">
-          KIRIM HADIAH
-        </div>
-
-        <div
-          class="gift-name"
-          style="line-height:1.8; margin-top:10px;"
-          id="gift-address">
-
-          Ugi Abdul Muchyi - 085157330757<br>
-          Jl. Bojong Kaler No. 51 RT.003 RW.012,<br>
-          Cigadung, Cibeunying Kaler,<br>
-          Kota Bandung.<br>
-          40191
-
-        </div>
-
-        <button class="copy-btn"
-          onclick="copyText('Jl. Bojong Kaler No. 51 RT.003 RW.012, Cigadung, Cibeunying Kaler, Kota Bandung.')">
-          COPY ADDRESS
-        </button>
-
-      </div>
-
-      <!-- Thank You -->
-      <div style="
-        margin-top:50px;
-        font-size:12px;
-        letter-spacing:2px;
-        opacity:0.7;
-      ">
-        THANK YOU
-      </div>
-
+    <div class="line-ornament" style="margin:22px auto; opacity:.45; animation: fadeIn 1s ease .45s both;">
+      <span></span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M4 0 L5.5 3 L8 3 L6 5 L7 8 L4 6 L1 8 L2 5 L0 3 L2.5 3Z" fill="#E8C4C4"/></svg>
+      <span></span>
     </div>
 
-  </section>
+    <div class="std-detail">
+      AKAD &amp; RESEPSI<br>
+      PUKUL 07.30 — 11.30 WIB
+    </div>
 
-  <!-- MUSIC -->
-  <audio id="music" loop>
-    <source src="Arctic Monkeys - Baby I'm Yours.mp3" type="audio/mp3">
-  </audio>
+    <div class="std-venue" style="margin:18px 0 28px;">
+      Pawon Joglo Kuningan<br>
+      Jl. Siliwangi No.172, Kec. Jalaksana<br>
+      Kabupaten Kuningan, Jawa Barat<br>
+      <span style="color:rgba(255,255,255,.6); font-size:11px;">(Masuk Lewat SPBU)</span>
+    </div>
 
-  <button class="music-btn" onclick="toggleMusic()">♪</button>
+    <a href="https://maps.app.goo.gl/93jtjRbytttCtce58" target="_blank" class="maps-btn">
+      ↗ &nbsp;GOOGLE MAPS
+    </a>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
-    if (name) {
-      document.getElementById("guestName").innerText = decodeURIComponent(name);
+  </div>
+</section>
+
+<!-- ════════ PAGE 6 — Wedding Gift ════════ -->
+<section id="page6">
+  <div class="gift-wrap">
+
+    <div class="gift-script">Wedding Gift</div>
+
+    <svg viewBox="0 0 220 20" class="ornament" style="margin:14px auto 24px; opacity:.5;">
+      <line x1="0" y1="10" x2="80" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+      <polygon points="90,10 98,5 106,10 98,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+      <circle cx="110" cy="10" r="3" fill="#E8C4C4"/>
+      <polygon points="114,10 122,5 130,10 122,15" stroke="#E8C4C4" stroke-width=".7" fill="none"/>
+      <line x1="140" y1="10" x2="220" y2="10" stroke="#E8C4C4" stroke-width=".8"/>
+    </svg>
+    <div class="std-venue" style="margin:18px 0 28px;">
+      Dengan penuh rasa syukur, kami berterima kasih atas setiap doa, perhatian, dan tanda kasih yang diberikan untuk awal perjalanan kami bersama.
+    </div>
+
+    <!-- BCA -->
+    <div class="gift-card">
+      <div class="gift-bank-label">BANK BCA</div>
+      <div class="gift-number">2991 4063 38</div>
+      <div class="gift-holder">Feby Marlia Anwar</div>
+      <button class="copy-btn" onclick="copyText('2991406338', this)">COPY</button>
+    </div>
+
+    <!-- MANDIRI -->
+    <div class="gift-card">
+      <div class="gift-bank-label">BANK MANDIRI</div>
+      <div class="gift-number">1310 0194 88354</div>
+      <div class="gift-holder">Ugi Abdul Muchyi</div>
+      <button class="copy-btn" onclick="copyText('1310019488354', this)">COPY</button>
+    </div>
+
+    <div class="gift-thankyou">— THANK YOU —</div>
+
+  </div>
+</section>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="Arctic Monkeys - Baby I'm Yours.mp3" type="audio/mp3">
+</audio>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Play / Pause">♪</button>
+
+<script>
+  /* ── Guest name from URL ── */
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
+  if (name) document.getElementById("guestName").innerText = decodeURIComponent(name);
+
+  /* ── Falling petals ── */
+  (function spawnPetals() {
+    const container = document.getElementById("petals");
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement("div");
+      p.className = "petal";
+      const size = 8 + Math.random() * 8;
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${size}px; height: ${size * 1.35}px;
+        animation-duration: ${7 + Math.random() * 8}s;
+        animation-delay: ${Math.random() * 10}s;
+        transform: rotate(${Math.random() * 360}deg);
+        border-radius: ${Math.random() > .5 ? "50% 10% 50% 10%" : "50% 50% 10% 50%"};
+      `;
+      container.appendChild(p);
     }
+  })();
 
-    function openInvitation() {
-      document.body.classList.add('unlocked');
-      document.getElementById("page1").remove();
+  /* ── Open invitation ── */
+  function openInvitation() {
+    document.body.classList.add("unlocked");
+    document.getElementById("page1").remove();
 
-      const page2 = document.getElementById("page2");
-      page2.scrollIntoView();
+    const page2 = document.getElementById("page2");
+    page2.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => page2.classList.add("show"), 200);
 
-      setTimeout(() => {
-        page2.classList.add('show');
-      }, 200);
+    const music = document.getElementById("music");
+    music.currentTime = 15;
+    music.play().catch(() => {});
+    document.getElementById("musicBtn").classList.add("playing");
 
-      const music = document.getElementById("music");
-      music.currentTime = 15; // start from 3 seconds
+    history.pushState(null, null, location.href);
+    window.onpopstate = () => history.go(1);
+  }
+
+  /* ── Music toggle ── */
+  function toggleMusic() {
+    const music = document.getElementById("music");
+    const btn   = document.getElementById("musicBtn");
+    if (music.paused) {
       music.play();
-
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-        history.go(1);
-      };
+      btn.classList.add("playing");
+    } else {
+      music.pause();
+      btn.classList.remove("playing");
     }
+  }
 
-    function toggleMusic() {
-      const music = document.getElementById("music");
-      if (music.paused) music.play(); else music.pause();
-    }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text);
-
-      alert("Copied!");
-    }
-
-  </script>
+  /* ── Copy helper ── */
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerText;
+      btn.innerText = "COPIED ✓";
+      btn.classList.add("copied");
+      setTimeout(() => {
+        btn.innerText = orig;
+        btn.classList.remove("copied");
+      }, 1800);
+    });
+  }
+</script>
 
 </body>
 </html>
